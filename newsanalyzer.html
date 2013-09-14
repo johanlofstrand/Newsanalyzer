@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="newsanalyzer.css"/>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+	  var socket = io.connect('http://localhost:7000');
+	  socket.on('news', function (data) {
+	    console.log("Client log: " + data);
+	    socket.emit('clientcallback', { my: 'data' });
+	  });
+	</script>
+</head>
+<body>
+
+	<div id="statusText"></div>
+	<div id="circleHolder"></div>
+
+	<script type="text/javascript">
+	
+		var tC = d3.select("#circleHolder")
+		.append("svg:svg")
+		.attr("width",100)
+		.attr("height",100);
+
+		tC.append("svg:circle")
+		.style("stroke","red")
+		.style("fill","white")
+		.attr("r",40)
+		.attr("cx",50)
+		.attr("cy",50);
+	</script>
+
+</body>
+
+</html>
